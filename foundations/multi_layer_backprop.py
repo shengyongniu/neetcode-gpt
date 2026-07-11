@@ -41,7 +41,7 @@ class Solution:
         da1 = W2.T @ dz2 # (hidden_dim,) = (hidden, output) * (output_size,)
         dz1 = da1 * (z1 > 0) 
         dw1 = dz1.reshape(-1, 1) @ x.reshape(1, -1) # (hidden, 1) * (1, input)
-        db1 = dz1.squeeze()
+        db1 = dz1
 
         return {"loss": loss, "dW1": np.round(dw1, 4), "db1": np.round(db1, 4), 
         "dW2": np.round(dw2, 4), "db2": np.round(db2, 4)}
