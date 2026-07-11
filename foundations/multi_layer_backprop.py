@@ -38,7 +38,7 @@ class Solution:
         dz2 = (2/n)*(z2-y_true) 
         dw2 = dz2.reshape(-1, 1) @ a1.reshape(1, -1) # (output_size, hidden_size)
         db2 = dz2
-        da1 = dz2.reshape(1, -1) @ W2 # output_size, = output_size, x output, hidden
+        da1 = W2.T @ dz2 # (hidden_dim,) = (hidden, output) * (output_size,)
         dz1 = da1 * (z1 > 0) 
         dw1 = dz1.reshape(-1, 1) @ x.reshape(1, -1) # (hidden, 1) * (1, input)
         db1 = dz1.squeeze()
