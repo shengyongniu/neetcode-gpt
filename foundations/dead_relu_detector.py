@@ -34,7 +34,11 @@ class Solution:
                 return 'use_leaky_relu'
         if dead_fractions[0] > 0.3:
             return 'reinitialize'
-        if sorted(dead_fractions) == dead_fractions and dead_fractions[-1] > 0.1:
+        strictly_increase = True
+        for i in range(len(dead_fractions) - 1):
+            if dead_fractions[i] >= dead_fractions[i+1]:
+                strictly_increase = False
+        if strictly_increase and dead_fractions[-1] > 0.1:
             return 'reduce_learning_rate'
         if max(dead_fractions) < 0.1:
             return "healthy"
