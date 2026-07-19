@@ -19,13 +19,13 @@ class Solution:
             vocab_dict[v] = index + 1
         
         # print(vocab_dict)
-        ts_list = []
+        sequences = []
         for sentence in positive + negative:
-            encode = []
+            encoded = []
             for w in sentence.split():
-                encode.append(vocab_dict[w])
-            ts_list.append(torch.tensor(encode))
-        tensors = nn.utils.rnn.pad_sequence(ts_list, batch_first=True)
+                encoded.append(vocab_dict[w])
+            sequences.append(torch.tensor(encoded))
+        tensors = nn.utils.rnn.pad_sequence(sequences, batch_first=True)
         return tensors
 
 
