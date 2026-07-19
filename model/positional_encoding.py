@@ -11,9 +11,9 @@ class Solution:
         # then compute all values at once with broadcasting (no loops needed).
         # Assign sine to even columns (PE[:, 0::2]) and cosine to odd columns (PE[:, 1::2]).
         # Round to 5 decimal places.
-        pos = np.arange(seq_len).reshape(-1, 1)
-        two_i = np.arange(0, d_model, 2)
-        denumerator = 10000**(two_i / d_model)
+        pos = np.arange(seq_len).reshape(-1, 1) # seq_len, 1
+        two_i = np.arange(0, d_model, 2) # d_model,
+        denumerator = 10000**(two_i / d_model) # seq_len, d_model
         PE = np.zeros((seq_len, d_model))
         PE[:, 0::2] = np.sin(pos / denumerator)
         PE[:, 1::2] = np.cos(pos / denumerator)
