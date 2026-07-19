@@ -18,8 +18,8 @@ class Solution(nn.Module):
         # but you should average it into a B, embed_dim tensor before using the Linear layer
         embeded = self.model[0](x) # B, T, embed_dim
         embeded = embeded.mean(dim = 1) # B, embed_dim
-        output = self.model[1](embeded) # B, 1
-        output = self.model[2](output)
-        return torch.round(output, decimals = 4)
+        logits = self.model[1](embeded) # B, 1
+        prob = self.model[2](logits)
+        return torch.round(prob, decimals = 4)
 
         # Return a B, 1 tensor and round to 4 decimal places
