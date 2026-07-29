@@ -21,11 +21,11 @@ class MultiHeadedSelfAttention(nn.Module):
         # Run each head on the input, concatenate outputs along dim=2
         # Pass concatenated result through the output projection (W_O)
         # Return result rounded to 4 decimal places
-        final_output = self.heads[0](embedded)
+        concatenated = self.heads[0](embedded)
         for head in self.heads[1:]:
             output = head(embedded)
-            final_output = torch.cat([final_output, output], dim = 2)
-        res = self.output(final_output)
+            concatenated = torch.cat([concatenated, output], dim = 2)
+        res = self.output(concatenated)
         return torch.round(res, decimals = 4)
 
     class SingleHeadAttention(nn.Module):
